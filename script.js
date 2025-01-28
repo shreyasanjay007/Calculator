@@ -7,25 +7,56 @@ const calciBody = document.getElementById("calci-body");
 
 const statusBar = document.createElement("div")
 statusBar.id = "status-bar"
-statusBar.innerHTML = `<div>12:50</div>
+statusBar.innerHTML = `<div class="time-dark" >12:50</div>
                         <div id="device-status" ></div>`
 calciBody.appendChild(statusBar)
 
 
 const deviceStatus = document.getElementById("device-status")
-deviceStatus.innerHTML = `<div style="height:20px;" > <img width="16px" style=" filter:invert(100%); " src="/assets/signal-status.png"  /> </div>
-                          <div style="height:20px;" > <img width="16px" style=" filter:invert(100%); " src="/assets/wifi.png"  /> </div>
-                          <div style="height:14px;" > <img width="16px" style=" filter:invert(100%); " src="/assets/battery.png"  /> </div>`
+deviceStatus.innerHTML = `<div style="height:20px;" > <img class="device-status-dark" width="16px" " src="/assets/signal-status.png"  /> </div>
+                          <div style="height:20px;" > <img class="device-status-dark" width="16px" " src="/assets/wifi.png"  /> </div>
+                          <div style="height:14px;" > <img class="device-status-dark" width="16px" " src="/assets/battery.png"  /> </div>`
 statusBar.appendChild(deviceStatus)
+
 
 
 // *********************************Mode Button*************************
 
-const modeButton = document.createElement("div")
-modeButton.id = "mode-button"
-modeButton.innerHTML = `<div class="mode-icon" > <img width="100%" src="/assets/sun.png" /> </div>
-                        <div class="mode-icon" > <img width="100%" src="/assets/moon.png" /> </div>`
-calciBody.appendChild(modeButton)
+const modeButtonDiv = document.createElement("div")
+modeButtonDiv.id = "mode-button-div";
+modeButtonDiv.innerHTML = `<div class="mode-icon" id="moon" > <img src="/assets/moon.png" width="28px" /> </div>
+                            <div id="mode-button" class="mode-button-dark"></div>
+                            <div class="mode-icon" id="sun" > <img src="/assets/sun.png" width="100%" /> </div>`
+calciBody.appendChild(modeButtonDiv)
+
+
+
+const modeButton = document.getElementById("mode-button")
+modeButton.innerHTML = `<button id="dark-mode" class="dark-mode" ></button>`
+
+const toggleButton = document.getElementById("dark-mode")
+const time = document.getElementsByClassName("time-dark")[0]
+
+
+toggleButton.addEventListener('click',()=>{
+    
+    toggleButton.classList.toggle("light-mode")
+    modeButton.classList.toggle("mode-button-light")
+    time.classList.toggle("time-light")
+    statusBar.classList.toggle("status-bar-light")
+    modeButtonDiv.classList.toggle("calci-body-light")
+    displayScreen.classList.toggle("display-screen-light")
+    keypad.classList.toggle("keypad-light")
+    calciBody.classList.toggle("calci-body-light")
+    
+    for(let i=0; i<3; i++){
+        const deviceStatusLight = document.getElementsByClassName("device-status-dark")[i]
+        deviceStatusLight.classList.toggle("device-status-light")
+    }
+})
+
+
+
 
 
 // ***********************************Display Screen***************************
@@ -36,48 +67,52 @@ calciBody.appendChild(displayScreen)
 
 // ****************************************Keypad**************************************
 
+ 
+
 const keypad = document.createElement("div")
 keypad.id = "keypad"
-
-const keyArray = [ ["AC","⌫","%","÷"], ["7","8","9","×"], ["4","5","6","-"], ["1","2","3","+"], ["z","0",".","="]  ]
-
-for(let i=1; i<6; i++){
-    const row = document.createElement("div")
-    row.id = `row${i}`
-    row.className = "rows"
-    keypad.appendChild(row)
-
-    for(let j=1; j<5; j++){
-        const key = document.createElement("button")
-        key.id = `row${i}-key${j}`
-        key.className = "keys"
-        key.innerHTML =`${keyArray[i-1][j-1]}`
-        key.value =`${keyArray[i-1][j-1]}`
-        row.appendChild(key)
-
-        key.addEventListener('click',(event)=>{
-            const keyValue = event.currentTarget.value
-            if(keyValue === "AC"){
-                displayScreen.value = "";
-            } else if(keyValue === "⌫"){
-                displayScreen.value = displayScreen.value.slice(0,-1);
-            } else if(keyValue === "="){
-                try{
-                    displayScreen.value = eval(displayScreen.value.replace("×","*").replace("%","/"))
-                } catch(error){
-                    displayScreen.value = "Error";
-                }
-                
-            } else{
-                displayScreen.value += keyValue
-            }
-        })
-    }
-    
-}
-
-
-
 calciBody.appendChild(keypad)
 
+const keyArray = ["AC","⌫","%","÷","7","8","9","×","4","5","6","-","1","2","3","+","🔍","0",".","="]
+
+
+for(let i=1; i<21; i++){
+    const keys = document.createElement("button")
+    keys.id = `key${i}`
+    keys.className = "keys"
+    keys.value = `${keyArray[i - 1]}`
+    keys.innerHTML = `${keyArray[i - 1]}`
+    keypad.appendChild(keys)
+
+    keys.addEventListener('click',(event)=>{
+        const keyValue = event.currentTarget.value;
+       
+        if(keyValue === "AC"){
+            displayScreen.value = "";
+        } else if(keyValue === "⌫"){
+            displayScreen.value = displayScreen.value.slice(0,-1);
+        } else if(keyValue === "="){
+            try{
+                displayScreen.value = eval(displayScreen.value.replace("×","*").replace("÷","/"))
+            }
+            catch(error){
+                displayScreen.value = "Error"
+            }
+        }else if(keyValue === "🔍"){
+                enlarge();
+        } else{
+            displayScreen.value += keyValue
+        }
+
+    })
+
+}
+
+function enlarge(){
+    calciBody.classList.toggle("calci-body-landscape")
+
+    const keyArray = ["Rad","Deg","x!","(",")","%","AC","Inv","sin","ln","7","8","9","÷","π","cos","log","4","5","6","×","e","tan","√","1","2","3","-","\(x^{y}\)","EXP","","0",".","=","+"];
+
+    
+}
 
