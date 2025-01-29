@@ -6,17 +6,19 @@
     box-sizing: border-box;
     font-family: "Poppins", serif;
 }
+
+
 body{
     height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #ad5389;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #3c1053, #ad5389);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #3c1053, #ad5389); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+    background: #ad5389; 
+    background: -webkit-linear-gradient(to right, #3c1053, #ad5389);  
+    background: linear-gradient(to right, #3c1053, #ad5389);
 }
+
 
 #calci-body{
     height: 550px;
@@ -25,6 +27,7 @@ background: linear-gradient(to right, #3c1053, #ad5389); /* W3C, IE 10+/ Edge, F
     background-color: #22252D;
 }
 
+
 #status-bar{
     height: 30px;
     width: 100%;
@@ -32,10 +35,10 @@ background: linear-gradient(to right, #3c1053, #ad5389); /* W3C, IE 10+/ Edge, F
     padding: 0px 15px;
     justify-content: space-between;
     align-items: center;
-    /* border: 1px solid red; */
     border-top-left-radius: 20px;
     border-top-right-radius: 20px ;
 }
+
 
 #device-status{
     height: 25px;
@@ -45,6 +48,7 @@ background: linear-gradient(to right, #3c1053, #ad5389); /* W3C, IE 10+/ Edge, F
     align-items: center;
 }
 
+
 #mode-button-div{
     height: 60px;
     width: 100%;
@@ -53,8 +57,9 @@ background: linear-gradient(to right, #3c1053, #ad5389); /* W3C, IE 10+/ Edge, F
     justify-content: center;
     align-items: center;
     gap: 10px;
-    /* border: 1px solid white; */
 }
+
+
 
 #mode-button{
     height: 40px;
@@ -68,18 +73,12 @@ background: linear-gradient(to right, #3c1053, #ad5389); /* W3C, IE 10+/ Edge, F
 
 }
 
+
 .mode-button-dark{
     border: 2px solid white;
     background-color: black;
 }
 
-.mode-button-light{
-    border: 2px solid black;
-    background-color: #f5f3f3;
-}
-
-
- 
 
 .dark-mode{
     height: 30px;
@@ -89,6 +88,103 @@ background: linear-gradient(to right, #3c1053, #ad5389); /* W3C, IE 10+/ Edge, F
     outline: none;
     border: none;
     cursor: pointer;
+}
+
+
+.time-dark{
+    color: white;
+}
+
+
+.device-status-dark{
+    filter: invert(100%);
+}
+
+
+.mode-icon{
+    height: 30px;
+    width: 30px;
+}
+
+
+#display-screen{
+    height: 100px;
+    width: 100%;
+    text-align: right;
+    padding:0px 10px;
+    font-size: 32px;
+    background-color: #22252D;
+    color: white;
+    overflow-x: auto;
+    direction: ltr;
+    border: none;
+    outline: none;
+}
+
+
+#keypad{
+    height: 360px;
+    width: 100%;
+    border: 1px solid #42454A;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    background-color: #42454A;
+}
+
+
+.keys{
+    height: 52px;
+    width: 52px;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 12px;
+    background-color: #22252D;
+    border: 1px solid white;
+}
+
+
+#key1,#key2,#key3,#key4,#key8,#key12,#key16,#key17{
+    color: orange;
+}
+
+#key20{
+    background-color: orange;
+}
+
+
+
+
+
+/* *******************************Dark-Light Toggle************************* */
+
+
+
+#calci-body.calci-body-light{
+    background-color: white; 
+}
+
+
+.status-bar-light{
+    background-color: white;
+}
+
+.time-light{
+    color: black;
+}
+
+.device-status-light{
+    filter: invert(0%);
+}
+
+
+.mode-button-light{
+    border: 2px solid black;
+    background-color: #f5f3f3;
 }
 
 .light-mode{
@@ -105,98 +201,14 @@ background: linear-gradient(to right, #3c1053, #ad5389); /* W3C, IE 10+/ Edge, F
 
 
 
-.status-bar-light{
-    background-color: white;
-}
-
-.time-dark{
-    color: white;
-}
-
-.time-light{
-    color: black;
-}
-
-
-.device-status-dark{
-    filter: invert(100%);
-}
-.device-status-light{
-    filter: invert(0%);
-}
-
-.mode-icon{
-    height: 30px;
-    width: 30px;
-}
-
-#display-screen{
-    height: 100px;
-    width: 100%;
-    text-align: right;
-    text-align: right;
-    font-size: 32px;
-    /* margin-bottom: 30px; */
-    background-color: #22252D;
-    color: white;
-    /* border: 1px solid white; */
-    border: none;
-    outline: none;
-}
-
 #display-screen.display-screen-light{
     background-color: white;
     color: black;
 }
 
-#keypad{
-    height: 360px;
-    width: 100%;
-    padding-left: 18.4px;
-    padding-top: 30px;
-    display: flex;
-    flex-wrap:wrap ;
-    /* row-gap: px; */
-    column-gap: 18.4px;
-    border-radius: 12px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    background-color: #3a3c41;
-    /* border: 1px solid white; */
-}
+
 
 #keypad.keypad-light{
     background-color: #f5f3f3;
-}
-
-#calci-body.calci-body-light{
-    background-color: white;
-}
-
-.keys{
-    height: 52px;
-    width: 52px;
-    color: white;
-    font-size: 20px;
-    font-weight: 600;
-    border-radius: 12px;
-    background-color: #22252D;
-    /* border: 1px solid white; */
-    border: none;
-    outline: none;
-}
-
-#key1,#key2,#key3,#key4,#key8,#key12,#key16,#key17{
-    color: orange;
-}
-
-#key20{
-    background-color: orange;
-}
-
-/* *******************************Landscape************************* */
-
-#calci-body.calci-body-landscape{
-    width: 700px;
-
+    border: 1px solid #f5f3f3;
 }
