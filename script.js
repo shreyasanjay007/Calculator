@@ -1,4 +1,4 @@
-// **************************Calculator Body*************************************
+// **************************Calculator Body*****************
 
 const calciBody = document.getElementById("calci-body");
 
@@ -56,63 +56,58 @@ toggleButton.addEventListener('click',()=>{
 })
 
 
-
-
-
 // ***********************************Display Screen***************************
 
 const displayScreen = document.createElement("input")
 displayScreen.id = "display-screen"
 calciBody.appendChild(displayScreen)
 
+
+
 // ****************************************Keypad**************************************
 
- 
 
-const keypad = document.createElement("div")
+const keypad = document.createElement('div')
 keypad.id = "keypad"
 calciBody.appendChild(keypad)
 
+
 const keyArray = ["AC","⌫","%","÷","7","8","9","×","4","5","6","-","1","2","3","+","🔍","0",".","="]
 
-
-for(let i=1; i<21; i++){
-    const keys = document.createElement("button")
-    keys.id = `key${i}`
-    keys.className = "keys"
-    keys.value = `${keyArray[i - 1]}`
-    keys.innerHTML = `${keyArray[i - 1]}`
-    keypad.appendChild(keys)
-
-    keys.addEventListener('click',(event)=>{
-        const keyValue = event.currentTarget.value;
-       
-        if(keyValue === "AC"){
-            displayScreen.value = "";
-        } else if(keyValue === "⌫"){
-            displayScreen.value = displayScreen.value.slice(0,-1);
-        } else if(keyValue === "="){
-            try{
-                displayScreen.value = eval(displayScreen.value.replace("×","*").replace("÷","/"))
-            }
-            catch(error){
-                displayScreen.value = "Error"
-            }
-        }else if(keyValue === "🔍"){
-                enlarge();
-        } else{
-            displayScreen.value += keyValue
-        }
-
-    })
-
+for(let i=1; i<=20; i++){
+    const key = document.createElement('button')
+    key.id = `key${i}`
+    key.className = "keys"
+    key.value = `${keyArray[i-1]}`
+    key.innerHTML = `${keyArray[i-1]}`
+    keypad.appendChild(key)
 }
 
-function enlarge(){
-    calciBody.classList.toggle("calci-body-landscape")
 
-    const keyArray = ["Rad","Deg","x!","(",")","%","AC","Inv","sin","ln","7","8","9","÷","π","cos","log","4","5","6","×","e","tan","√","1","2","3","-","\(x^{y}\)","EXP","","0",".","=","+"];
+document.addEventListener("DOMContentLoaded", () => {
+    const displayScreen = document.getElementById("display-screen");
+    const keys = document.querySelectorAll(".keys");
 
-    
-}
+    keys.forEach((key) => {
+        key.addEventListener("click", () => {
+            const keyValue = key.value;
 
+            if (keyValue === "AC") {
+                displayScreen.value = "";
+            }else if (keyValue === "⌫") {
+                displayScreen.value = displayScreen.value.slice(0, -1);
+            } else if (keyValue === "=") {
+                try {
+                    displayScreen.value = eval(displayScreen.value.replace("×","*").replace("÷","/"));
+                } catch (error) {
+                    displayScreen.value = "Error";
+                }
+            } else {
+                displayScreen.value += keyValue;
+            }
+        });
+    });
+
+
+   
+});
